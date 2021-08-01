@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "chatwithfriends-733eb": {
+      "hosting": {
+        "chat-with-friends": [
+          "chatwithfriends-733eb"
+        ]
+      }
+    }
+  }
+}
