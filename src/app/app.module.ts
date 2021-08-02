@@ -10,9 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { environment } from 'src/environments/environment';
 import { HeaderComponent } from './components/header/header.component';
+import { ChatContainerComponent } from './components/chat-container/chat-container.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { RoomListComponent } from './components/room-list/room-list.component';
+import { AddRoomComponent } from './components/add-room/add-room.component';
+import { HomeComponent } from './components/home/home.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, ChatContainerComponent, ChatComponent, RoomListComponent, AddRoomComponent, HomeComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
