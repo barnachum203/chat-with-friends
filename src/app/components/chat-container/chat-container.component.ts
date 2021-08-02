@@ -6,10 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-container.component.css']
 })
 export class ChatContainerComponent implements OnInit {
-
+  conversations: any
+  selectedConversation: boolean = true;
+  text: string | undefined
+  events: Array<any> = []
   constructor() { }
 
-  ngOnInit(): void {
+  
+  buildConversationsArray() {
   }
+ 
+  ngOnInit() {
+  }
+ 
+  selectConversation(conversationId: string) {
+  }
+ 
+  sendText(text: string) {
+  }
+ 
+
 
 }

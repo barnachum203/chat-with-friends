@@ -1,5 +1,21 @@
-<div class="chat">
-    <h1>
-        Chat !!!
-    </h1>
+<mat-divider></mat-divider>
+<mat-list dense class="conversation-history mat-typography">
+  ... 
+  <p>
+      sad
+  </p>...g ...f ...f
+</mat-list>
+<div class="conversation-input">
+  <mat-divider></mat-divider>
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      placeholder="Start chatting..."
+      name="text"
+      [(ngModel)]="text"
+    />
+    <mat-icon matSuffix>send</mat-icon>
+  </mat-form-field>
 </div>
+
+<p>{{ text }}</p>

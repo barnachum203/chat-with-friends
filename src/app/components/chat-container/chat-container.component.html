@@ -1,1 +1,42 @@
-<p>chat-container works!</p>
+<mat-sidenav-container class="container">
+    <mat-sidenav mode="side" opened>
+      <mat-card>
+        <mat-tab-group>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon matListIcon>forum</mat-icon>
+            </ng-template>
+            <mat-list class="conversations">
+                <app-room-list></app-room-list>
+            </mat-list>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </mat-sidenav>
+    <mat-sidenav position="end" mode="side" opened *ngIf="selectedConversation">
+      <mat-card>
+        <mat-list class="members">
+            ...
+        </mat-list>
+      </mat-card>
+    </mat-sidenav>
+    <section class="empty-conversation" *ngIf="!selectedConversation">
+      <h1 class="mat-display-1">Select a conversation from the left to start chatting</h1>
+    </section>
+    <section *ngIf="selectedConversation">
+      <div class="mat-typography conversation-header">
+          <app-chat></app-chat>
+      </div>
+     <!--  <mat-divider></mat-divider>
+      <mat-list dense class="conversation-history mat-typography">
+        ...
+      </mat-list>
+      <div class="conversation-input">
+        <mat-divider></mat-divider>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Start chatting..." name="text" [(ngModel)]="text">
+          <mat-icon matSuffix>send</mat-icon>
+        </mat-form-field>
+      </div> -->
+    </section>
+  </mat-sidenav-container>
