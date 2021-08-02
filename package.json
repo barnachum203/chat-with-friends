@@ -21,9 +21,11 @@
     "@angular/platform-browser": "~12.1.0",
     "@angular/platform-browser-dynamic": "~12.1.0",
     "@angular/router": "~12.1.0",
+    "@schematics/angular": "^12.1.4",
     "firebase": "^8.8.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
+    "updated": "^2.0.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
