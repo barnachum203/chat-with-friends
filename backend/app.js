@@ -1,4 +1,3 @@
-'use strict';
 import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -8,18 +7,18 @@ import userRoutes from './routes/user-routes'
 const app = express();
 
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 //If you are using Express 4.16+ you can remove this line:
-app.use(bodyParser.json())
 
-app.use('/api', userRoutes.routes)
+app.use(bodyParser.json());
 
-app.listen(config.port, () => {
-  console.log(`Server is listening on port ${config.port}`);
-});
+app.use('/api', userRoutes.routes);
+
+
 
 //get all channels
 app.get("/", (req, res) => {
+    console.log("asdfsdaf");
   res.send(`a get request with / route on port ${config.port}`);
 });
 
@@ -40,4 +39,8 @@ app.get("/chat/:id", (req, res) => {
   //delete channel
   app.delete("/chat/:id", (req, res) => {
     res.send(`a delete request with / route on port ${config.port}`);
+  });
+
+  app.listen(config.port, () => {
+    console.log(`Server is listening on port ${config.port}`);
   });

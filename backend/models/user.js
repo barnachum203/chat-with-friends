@@ -6,3 +6,5 @@ class User {
     this.photoURL = photoURL;
   }
 }
+
+module.exports = User;
