@@ -70,9 +70,20 @@ const updateUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userRef = await firestore.collection("users").doc(id).delete();
+    res.send(`User deleted Successfully.`);
+  } catch (err) {
+    res.status(500).send("Somethig went wrong - " + err);
+  }
+};
+
 module.exports = {
   addUser,
   getUsers,
   getUserById,
   updateUser,
+  deleteUser,
 };
