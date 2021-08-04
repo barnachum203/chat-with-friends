@@ -1,9 +1,20 @@
 <mat-divider></mat-divider>
 <mat-list dense class="conversation-history mat-typography">
-  ... 
-  <p>
-      sad
-  </p>...g ...f ...f
+  <div class="message-line" *ngFor="let message of messages">
+    <div class="user">
+      {{ message.user }}
+      <br />
+      {{ message.timeStamp | date: "medium" }}
+      <p></p>
+    </div>
+    <div class="myMessage" *ngIf="message.user == user; else anotherUser">
+      <h1>{{ message.message }}</h1>
+    </div>
+    <ng-template #anotherUser>
+      <p>{{ message.message }}</p>
+    </ng-template>
+    <p></p>
+  </div>
 </mat-list>
 <div class="conversation-input">
   <mat-divider></mat-divider>
@@ -16,6 +27,7 @@
     />
     <mat-icon matSuffix>send</mat-icon>
   </mat-form-field>
+  <button (click)="sendMessage()">Send</button>
 </div>
 
 <p>{{ text }}</p>

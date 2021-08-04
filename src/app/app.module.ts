@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { environment } from 'src/environments/environment';
 import { HeaderComponent } from './components/header/header.component';
@@ -28,6 +29,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

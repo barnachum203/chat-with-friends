@@ -37,6 +37,7 @@ export class AuthService {
         this.userDetails$.next(<User>user);
         const userString: string = JSON.stringify(user);
         localStorage.setItem('user', userString)
+        localStorage.setItem('userId', user.uid)
         this.isLoggedIn$.next(true);
       } else {
         localStorage.removeItem('user');
