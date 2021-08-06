@@ -1,19 +1,17 @@
-.anotherUser{
-    background-color: blue;
+.anotherUser {
+  background-color: blue;
 }
-.myMessage{
-    background-color: blue;
-    border-radius: 25% 10%;
-    max-width: 50%;
-    
+.myMessage {
+  background-color: rgba(184, 135, 11, 0.315);
 }
-.message-line{
-    border-bottom-left-radius: 3;
-    border: 2px solid red;
+.message-line {
+  border: 2px solid red;
 }
-.conversation-history{
-    background-color: #ffffff;
-    opacity: 1;
-    background-image:  radial-gradient(#444cf7 2px, transparent 2px), radial-gradient(#444cf7 2px, #ffffff 2px);
-    background-size: 80px 80px;
-    background-position: 0 0,40px 40px;}
+.conversation-history {
+  background-color: #ffffff;
+  opacity: 1;
+  background-image: radial-gradient(#444cf7 2px, transparent 2px),
+    radial-gradient(#444cf7 2px, #ffffff 2px);
+  background-size: 80px 80px;
+  background-position: 0 0, 40px 40px;
+}

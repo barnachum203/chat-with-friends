@@ -9,6 +9,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 const modules: any = [
   MatToolbarModule,
@@ -19,7 +20,7 @@ const modules: any = [
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatTabsModule
+  MatTabsModule,MatTableModule
 ];
 
 @NgModule({

@@ -14,26 +14,44 @@ const sendMessage = async (req, res) => {
   const uid = data.uid; //Need to past uid of the user in the body.
 
   try {
-    const channelRef = await firestore.collection("channels").doc(id);
+    const channelRef = firestore.collection("channels").doc(id);
     if (!channelRef.empty) {
       firestore.unionRes;
       await channelRef.update({
         messages: admin.firestore.FieldValue.arrayUnion(data),
       });
-      res.send("Added message ");
+      console.log(`Message has been sent.`);
+      res.status(200).send({message: 'Success!'});
     } else {
-      res.send("Message Not added ");
+      console.log(`Message has not sent.`);
+
+      res.status(500).send("Message has not sent.");
     }
   } catch (err) {
+    console.log(`err:` +err);
     res.status(500).send("Somthing went wrong - " + err);
   }
 };
 
+const getMessages = async (req, res) => {
+  const id = req.params.id;
+const channelRef = firestore.collection("channels").doc(id);
+
+const observer = await channelRef.onSnapshot(snapshot => {
+ console.log(`changes: ${snapshot}`);
+ res.send(snapshot)
+}, err => {
+ console.log(`Error: ${err}`);
+ res.send(err)
+
+});
+
+};
 
 
 module.exports = {
   sendMessage,
-  // getMessages,
+  getMessages,
   // ,
   // removeChannel,
   // updateChannel,

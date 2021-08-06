@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Channel } from 'src/app/models/channel.interface';
 
 @Component({
   selector: 'app-chat-container',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatContainerComponent implements OnInit {
   conversations: any
-  selectedConversation: boolean = true;
+  selectedConversation: boolean = true; // Change to false when out of dev mode
   text: string | undefined
   events: Array<any> = []
+  choosenChan: any;
+
   constructor() { }
 
   
@@ -25,6 +28,11 @@ export class ChatContainerComponent implements OnInit {
   sendText(text: string) {
   }
  
+  choosenChannel(channel: any){
+    this.choosenChan = channel;
+    console.log(this.choosenChan);
+    this.selectedConversation = true;    
+  }
 
 
 }

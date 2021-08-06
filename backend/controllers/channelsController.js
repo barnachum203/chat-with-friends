@@ -25,14 +25,15 @@ const getChannelById = async (req, res) => {
 
 const getAllChannels = async (req, res) => {
   try {
-    const id = req.params.id;
-    const channel = await firestore.collection("channels").get();
+    const channelCollection = firestore.collection("channels");
+    const channel = await channelCollection.get();
     if (channel.empty) {
       res.send(200, "There is no channels to send");
     } else {
       const channels = [];
       channel.forEach((doc) => {
         const channel = new Channel(
+          doc.id,
           doc.data().name,
           doc.data().pass,
           doc.data().messages
@@ -66,9 +67,6 @@ const updateChannel = async (req, res) => {
     res.send(500, "Something went wrong - " + err);
   }
 };
-
-
-
 
 module.exports = {
   addChannel,

@@ -7,7 +7,7 @@
               <mat-icon matListIcon>forum</mat-icon>
             </ng-template>
             <mat-list class="conversations">
-                <app-room-list></app-room-list>
+                <app-room-list (channelChoosen)="choosenChannel($event)"></app-room-list>
             </mat-list>
           </mat-tab>
         </mat-tab-group>
@@ -25,7 +25,7 @@
     </section>
     <section *ngIf="selectedConversation">
       <div class="mat-typography conversation-header">
-          <app-chat></app-chat>
+          <app-chat [channel]="choosenChan"></app-chat>
       </div>
      <!--  <mat-divider></mat-divider>
       <mat-list dense class="conversation-history mat-typography">
