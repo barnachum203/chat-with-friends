@@ -1,4 +1,4 @@
-import { Component, OnInit, Output , EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Channel } from 'src/app/models/channel.interface';
 import { ChannelService } from 'src/app/services/channel.service';
 
@@ -17,27 +17,28 @@ export class RoomListComponent implements OnInit {
     this.getChannels();
   }
 
-  async getChannels(){
-    this.channelService.getChannels().subscribe((data: any[]) =>{
-      if(data){
+  async getChannels() {
+    this.channelService.getChannels().subscribe((data: any[]) => {
+      if (data) {
         console.log(data);
-        
-      data.forEach((channel: Channel) => {
-        this.channels.push(channel)
-      });
-      console.log(this.channels);
-      
-    }else{
-      console.log("No data in channels");
-      
-    }
-    })
+
+        data.forEach((channel: Channel) => {
+          this.channels.push(channel);
+        });
+        console.log(this.channels);
+      } else {
+        console.log('No data in channels');
+      }
+    });
   }
 
-
-  choosenChannel(channel:Channel){
-// console.log(channel);
+  choosenChannel(channel: Channel) {
+    console.log(channel);
 
     this.channelChoosen.emit(channel);
+  }
+
+  addChannel() {
+    console.log('Add room called');
   }
 }

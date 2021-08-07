@@ -1,10 +1,14 @@
-<p>in room list</p>
-<div class="channels-cntainer">
-    <ul *ngFor="let channel of channels">
-        <li >
-            <a routerLink="/chat/{{channel.id}} " (click)="choosenChannel(channel)" >
-                {{channel.name}}
-            </a>
-        </li>
-    </ul>
-</div>
+<mat-selection-list class="conversations" #rooms [multiple]="false">
+  <mat-list-option
+    *ngFor="let channel of channels"
+    [value]="channel"
+    (click)="choosenChannel(channel)"
+  >
+    {{ channel.name }}
+    <mat-divider></mat-divider>
+  </mat-list-option>
+</mat-selection-list>
+<p></p>
+<button mat-raised-button color="primary" (click)="addChannel()">
+  Add Room
+</button>

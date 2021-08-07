@@ -1,12 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-.container{
-    width: 70%;
-    height: 90%;
-    margin: 10px;
-    border: 1px solid #555;   
-     
+.container {
+  display: flex;
+  width: 100%;
+  height: 90%;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* .mat-drawer.mat-drawer-side {
+    padding: 0 5px;
+}
+ 
+.conversation-header h2, .conversation-header p {
+    align-items: center;
+    display: flex;
+}
+ 
+.empty-conversation h1 {
+    margin: 0;
+}
+ 
+.mat-card {
+    height: 100%;
+    padding: 0 24px;
+    overflow: scroll;
+}
+ 
+section .mat-list .mat-list-avatar{
+    width: 25px;
+    height: 25px;
+}
+ */
+
+.empty-conversation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.conversation-history.mat-list p {
+  margin: 0px;
+}
+
+.conversations .mat-list-item {
+  cursor: pointer;
+}
+.conversation-history.mat-list {
+  height: calc(100% - 180px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  position: absolute;
+  width: 100%;
+  height: 93%;
+}
+.conversation-input {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #fafafa;
+}
+.text-center {
+  text-align: center;
+  width: 100%;
+}
+.mat-list-avatar {
+  margin: 0 5px;
+}
+
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.full-width {
+  width: 100%;
+}
+
+.full-width .mat-icon {
+  cursor: pointer;
 }
