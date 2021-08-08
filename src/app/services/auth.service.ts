@@ -42,6 +42,7 @@ export class AuthService {
         localStorage.setItem('user', userString)
         localStorage.setItem('userId', user.uid)
         this.isLoggedIn$.next(true);
+        this.router.navigateByUrl('/chat'); //if the user logged in -> navigate to the chat
       } else {
         localStorage.removeItem('user');
         this.isLoggedIn$.next(false);
