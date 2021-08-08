@@ -1,19 +1,28 @@
 .notMyMessage {
-  background-color: blue;
+  font-size: 24px;
+  font-weight: 200;
+  padding: 5px;
+  border-radius: 5px;
+
+  background-color: rgba(255, 255, 255);
+
 }
 .myMessage {
   padding: 5px;
-  background-color: rgba(184, 135, 11, 0.315);
+  background-color: rgba(248, 180, 8, 0.315);
   border-radius: 5px;
+  font-size: 24px;
+  font-weight: 200;
 }
 .message-line {
   padding: 5px;
 }
 .conversation-history {
-  background-color: #ffffff;
+  /* background-color: #efece7; */
   opacity: 1;
   background-image: radial-gradient(#914a10 2px, transparent 2px),
     radial-gradient(#326b11 2px, #ffffff 2px);
   background-size: 80px 80px;
   background-position: 0 0, 40px 40px;
 }
+

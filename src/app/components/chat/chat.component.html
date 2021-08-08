@@ -3,19 +3,24 @@
   <ul>
     <li class="message-line" *ngFor="let message of messages">
       <div class="user">
-        {{ message.user }}
+        <b>{{ message.from }}</b>
+        <img src="user.photoURL" alt="" />
+
         <br />
         {{ message.timeStamp | date: "medium" }}
+        נשלח ב
         <p></p>
       </div>
       <div
         class="myMessage right"
-        *ngIf="message.user == user; else anotherUser"
+        *ngIf="message.userId == user.uid; else anotherUser"
       >
         <p>{{ message.message }}</p>
       </div>
-      <ng-template class="notMyMessage left" #anotherUser>
-        <p>{{ message.message }}</p>
+      <ng-template #anotherUser>
+        <div class="notMyMessage left">
+          <p>{{ message.message }}</p>
+        </div>
       </ng-template>
       <p></p>
     </li>

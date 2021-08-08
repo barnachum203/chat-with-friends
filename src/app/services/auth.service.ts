@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
@@ -21,11 +22,13 @@ save user locally
 export class AuthService {
   private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private userDetails$: Subject<User> = new Subject<User>(); //We will use subject because we dont want to initial the value
+  private usersURL = 'http://localhost:8000/api/user';
 
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private http:HttpClient
   ) {
     const savedUserString = localStorage.getItem('user');
     if(savedUserString != null){
@@ -85,5 +88,9 @@ export class AuthService {
 
   public isLoggedIn(): Observable<boolean> {
     return this.isLoggedIn$.asObservable();
+  }
+
+  getUserDetails(id: string): Observable<User>{
+    return this.http.get<User>(`${this.usersURL}/${id}`);
   }
 }

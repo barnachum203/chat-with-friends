@@ -4,6 +4,7 @@ export interface Message{
     // messageId: string;
     message: string;
     timeStamp: number;
-    user: string | undefined;
+    from: string ;
+    userId: string;
     
 }

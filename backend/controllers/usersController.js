@@ -44,9 +44,10 @@ const getUserById = async (req, res) => {
     const id = req.params.id;
     const user = await firestore.collection("users").doc(id).get();
     if (user.exists) {
-      res.send(user.data());
+      console.log("user sent");
+      res.status(200).send(user.data());
     } else {
-      res.send(`No user found with the id: ${id}`);
+      res.status(500).send(`No user found with the id: ${id}`);
     }
   } catch (err) {
     res.status(500).send("Somethig went wrong - " + err);

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { map } from 'rxjs/internal/operators/map';
 import { Channel } from 'src/app/models/channel.interface';
 import { ChannelService } from 'src/app/services/channel.service';
 
@@ -14,31 +15,32 @@ export class RoomListComponent implements OnInit {
   constructor(private channelService: ChannelService) {}
 
   ngOnInit(): void {
-    this.getChannels();
-  }
-
-  async getChannels() {
-    this.channelService.getChannels().subscribe((data: any[]) => {
-      if (data) {
-        console.log(data);
-
-        data.forEach((channel: Channel) => {
-          this.channels.push(channel);
-        });
-        console.log(this.channels);
-      } else {
-        console.log('No data in channels');
-      }
-    });
+    this.getAllChannels();
   }
 
   choosenChannel(channel: Channel) {
-    console.log(channel);
-
     this.channelChoosen.emit(channel);
   }
 
   addChannel() {
     console.log('Add room called');
+  }
+
+  private getAllChannels(): void {
+    this.channelService
+      .getAllChannels()
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({
+            id: c.payload.doc.id,
+            ...c.payload.doc.data(),
+          }))
+        )
+      )
+      .subscribe((data) => {
+        this.channels = data;
+        console.log(`channels found: ${data.length}`);
+      });
   }
 }
