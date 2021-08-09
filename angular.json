@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["lodash", "@firebase/app-check", "rxjs/internal/Subject"],
+            "allowedCommonJsDependencies": ["lodash", "@firebase/app-check", "rxjs/internal/Subject", "rxjs/internal/operators/map"],
             "outputPath": "dist/chat-with-friends",
             "index": "src/index.html",
             "main": "src/main.ts",
