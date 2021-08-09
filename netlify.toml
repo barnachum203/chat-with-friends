@@ -1,8 +1,7 @@
 [build]
-  publish = "dist/angular-netlify-functions-starter"
-  command = "ng build --prod"
-  functions = "./functions"
+  publish = "dist/"
+  command = "ng run build"
 [[redirects]]
   from = "/*"
-  to = "/index.html"[build]
+  to = "/index.html"
   status = 200
