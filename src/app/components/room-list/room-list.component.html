@@ -1,3 +1,6 @@
+<button class="text-center" mat-raised-button color="primary" (click)="openDialog()">
+  Add Room
+</button>
 <mat-selection-list class="conversations" #rooms [multiple]="false">
   <mat-list-option
     *ngFor="let channel of channels"
@@ -9,6 +12,4 @@
   </mat-list-option>
 </mat-selection-list>
 <p></p>
-<button mat-raised-button color="primary" (click)="addChannel()">
-  Add Room
-</button>
+

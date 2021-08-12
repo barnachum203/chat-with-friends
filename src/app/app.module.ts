@@ -17,9 +17,10 @@ import { RoomListComponent } from './components/room-list/room-list.component';
 import { AddRoomComponent } from './components/add-room/add-room.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { DialogComponent } from './components/room-list/dialog/dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ChatContainerComponent, ChatComponent, RoomListComponent, AddRoomComponent, HomeComponent, PageNotFoundComponent],
+  declarations: [AppComponent, HeaderComponent, ChatContainerComponent, ChatComponent, RoomListComponent, AddRoomComponent, HomeComponent, PageNotFoundComponent, DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

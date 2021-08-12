@@ -35,6 +35,7 @@ export class ChatComponent implements OnInit, OnChanges {
     users: [],
     pass: 'null',
     messages: [],
+    creatorId: "null",
   };
 
   constructor(

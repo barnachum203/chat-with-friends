@@ -6,5 +6,6 @@ export interface Channel{
     name: string;
     users?: User[];
     pass?: string;
-    messages?: Message[]
+    messages?: Message[];
+    creatorId: string;
 }
