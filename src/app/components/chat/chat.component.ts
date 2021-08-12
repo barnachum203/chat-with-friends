@@ -9,6 +9,7 @@ import { Channel } from 'src/app/models/channel.interface';
 import { Message } from 'src/app/models/message.interface';
 import { User } from 'src/app/models/user.inteface';
 import { AuthService } from 'src/app/services/auth.service';
+import { ChannelService } from 'src/app/services/channel.service';
 import { MessagingService } from 'src/app/services/messaging.service';
 
 @Component({
@@ -18,37 +19,42 @@ import { MessagingService } from 'src/app/services/messaging.service';
 })
 export class ChatComponent implements OnInit, OnChanges {
   public text: string = '';
+  messages: any[] = [];
+  subscription: any;
+  channelId: string = '0';
+  sendingMessage: boolean = false;
+  currentUserId: string | null = '';
+
   user: User = {
     uid: 'null',
     email: 'null',
     displayName: 'null',
     photoURL: 'null',
   };
-  messages: any[] = [];
-  subscription: any;
-  channelId: string = '0';
-  sendingMessage: boolean = false;
-
   @Input() channel: Channel = {
     id: 'null',
     name: 'null',
     users: [],
     pass: 'null',
     messages: [],
-    creatorId: "null",
+    creatorId: 'null',
   };
 
   constructor(
     private messagingService: MessagingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private channelService: ChannelService
   ) {
     if (localStorage.getItem('userId')) {
+      this.currentUserId = localStorage.getItem('userId');
       this.authService
         .getUserDetails(localStorage.getItem('userId') || '')
         .subscribe((data) => {
           if (data) {
             // console.log(data);
             this.user = data;
+
+            // this.addUserToChannel()
           }
         });
     }
@@ -79,7 +85,9 @@ export class ChatComponent implements OnInit, OnChanges {
       //Subsucribe to new channel when choosed another room
       if (this.channel.id != this.channelId) {
         this.messages = [];
+        if (this.channelId != '0') this.removeUserFromChannel(); // Remove the user before we change channel id
         this.channelId = <string>this.channel.id;
+        this.addUserToChannel();
         this.getAllMessages(this.channelId);
       }
     } else {
@@ -104,5 +112,26 @@ export class ChatComponent implements OnInit, OnChanges {
         this.sendingMessage = false;
       });
     }
+  }
+
+  addUserToChannel() {
+    console.log(
+      `added user called uid: ${this.currentUserId}, cid: ${this.channelId}`
+    );
+    if (this.currentUserId)
+      this.channelService
+        .addUserToChannel(this.channelId, this.currentUserId)
+        .subscribe((msg) => {
+          console.log(msg);
+        });
+  }
+
+  removeUserFromChannel() {
+    console.log(
+      `remove user called uid: ${this.currentUserId}, cid: ${this.channelId}`
+    );
+    if (this.currentUserId)
+      this.channelService.removeUserFromChannel(this.channelId, this.currentUserId).subscribe(() =>{        
+      });
   }
 }

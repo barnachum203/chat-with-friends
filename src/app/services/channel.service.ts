@@ -24,6 +24,14 @@ export class ChannelService {
     return this.http.get<Channel>(this.channelURL + id)
   }
 
+  addUserToChannel(cid: string, uid:string): Observable<string>{
+    return this.http.post<string>(`${this.channelURL}/${cid}/${uid}`, uid)
+  }
+  
+  removeUserFromChannel(cid: string, uid:string): Observable<string>{
+    return this.http.delete<string>(`${this.channelURL}/${cid}/${uid}`)
+  }
+
     //Get realtime data from firebase (throghu AngularFirestore)
     getAllChannels(): AngularFirestoreCollection<Channel> {
       return this.store.collection('/channels');

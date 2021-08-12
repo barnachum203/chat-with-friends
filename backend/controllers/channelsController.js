@@ -1,5 +1,6 @@
 import firebase from "../db";
 import Channel from "../models/channel";
+import admin from "firebase-admin";
 
 const firestore = firebase.firestore();
 
@@ -68,10 +69,54 @@ const updateChannel = async (req, res) => {
   }
 };
 
+const removeUserFromChannel = async (req, res) =>{
+  try {
+    const cid = req.params.cid;
+    const uid = req.params.uid;
+    console.log(cid);
+    console.log(uid);
+    const channelRef = firestore.collection("channels").doc(cid);
+    await channelRef.update({
+      users: admin.firestore.FieldValue.arrayRemove(uid),
+    })
+    console.log(`removed user ${uid} successfully`);
+    res.send(`removed successfully`);
+  
+  } catch (error) {
+    console.log("Something went wrong - " + error);
+    res.status(500).send("Something went wrong - " + error);
+
+  }
+
+}
+
+const addUserToChannel = async (req, res) =>{
+  try {
+    const cid = req.params.cid;
+    const uid = req.params.uid;
+    console.log(cid);
+    console.log(uid);
+    const channelRef = firestore.collection("channels").doc(cid);
+    await channelRef.update({
+      users: admin.firestore.FieldValue.arrayUnion(uid),
+    })
+    console.log(`added user ${uid} successfully`);
+    res.send(`removed successfully`);
+  
+  } catch (error) {
+    console.log("Something went wrong - " + error);
+    res.status(500).send("Something went wrong - " + error);
+
+  }
+
+}
+
 module.exports = {
   addChannel,
   getChannelById,
   getAllChannels,
   removeChannel,
   updateChannel,
+  removeUserFromChannel,
+  addUserToChannel
 };
