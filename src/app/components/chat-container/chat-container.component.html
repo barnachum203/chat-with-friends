@@ -17,7 +17,7 @@
   </mat-sidenav>
   <mat-sidenav position="end" mode="side" opened *ngIf="selectedConversation">
     <mat-card>
-      <mat-list class="members"> ... </mat-list>
+      <app-members-list>  </app-members-list>
     </mat-card>
   </mat-sidenav>
   <section class="empty-conversation" *ngIf="!selectedConversation">

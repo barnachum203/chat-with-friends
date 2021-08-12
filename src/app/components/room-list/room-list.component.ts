@@ -19,12 +19,12 @@ export interface DialogData {
 })
 export class RoomListComponent implements OnInit {
   channels: Channel[] = [];
-  userId: string = '';
+  userId: string | null = '';
   pass: string = '';
   name: string = '';
 
   welcomeMsg: Message = {
-    message: 'Welcome To B-Chat, ',
+    message: 'Welcome To B-Chat, fill free to invite your friends!',
     timeStamp: Date.now(),
     from: 'System',
     userId: '0000',
@@ -66,7 +66,7 @@ export class RoomListComponent implements OnInit {
   }
 
   addChannel(channel: Channel) {
-    console.log('Add room called');
+    // console.log('Add room called');
     this.channelService.addChannel(channel).subscribe(() => {});
   }
 
@@ -84,7 +84,7 @@ export class RoomListComponent implements OnInit {
       )
       .subscribe((data) => {
         this.channels = data;
-        console.log(`channels found: ${data.length}`);
+        console.log(`channels found: ${data.length}`);        
       });
   }
 }
