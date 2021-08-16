@@ -3,8 +3,8 @@
   <ul>
     <li class="message-line" *ngFor="let message of messages">
       <div class="user">
-        <b>{{ message.from }}</b>
-        <img src="user.photoURL" alt="" />
+        <img src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_960_720.png" />
+        <b> -> {{ message.from }}</b>
 
         <br />
         {{ message.timeStamp | date: "medium" }}

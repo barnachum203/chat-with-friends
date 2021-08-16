@@ -73,13 +73,11 @@ const removeUserFromChannel = async (req, res) =>{
   try {
     const cid = req.params.cid;
     const uid = req.params.uid;
-    console.log(cid);
-    console.log(uid);
     const channelRef = firestore.collection("channels").doc(cid);
     await channelRef.update({
       users: admin.firestore.FieldValue.arrayRemove(uid),
     })
-    console.log(`removed user ${uid} successfully`);
+    console.log(`removed user ${uid} to ${cid} successfully`);
     res.send(`removed successfully`);
   
   } catch (error) {
@@ -94,13 +92,11 @@ const addUserToChannel = async (req, res) =>{
   try {
     const cid = req.params.cid;
     const uid = req.params.uid;
-    console.log(cid);
-    console.log(uid);
     const channelRef = firestore.collection("channels").doc(cid);
     await channelRef.update({
       users: admin.firestore.FieldValue.arrayUnion(uid),
     })
-    console.log(`added user ${uid} successfully`);
+    console.log(`added user ${uid} to ${cid} successfully`);
     res.send(`removed successfully`);
   
   } catch (error) {

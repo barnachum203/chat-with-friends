@@ -1,11 +1,11 @@
-import { Message } from "./message.interface";
-import { User } from "./user.inteface";
+import { Message } from './message.interface';
+import { User } from './user.inteface';
 
-export interface Channel{
-    id?: string;
-    name: string;
-    users?: User[];
-    pass?: string;
-    messages?: Message[];
-    creatorId: string;
+export interface Channel {
+  id?: string;
+  name: string;
+  users?: string[];
+  pass?: string;
+  messages?: Message[];
+  creatorId: string;
 }

@@ -84,7 +84,7 @@ export class RoomListComponent implements OnInit {
       )
       .subscribe((data) => {
         this.channels = data;
-        console.log(`channels found: ${data.length}`);        
+        console.log(`channels found: ${data.length}`);
       });
   }
 }
