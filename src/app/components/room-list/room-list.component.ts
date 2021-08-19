@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { map } from 'rxjs/internal/operators/map';
+import { Observable } from 'rxjs/internal/Observable';
 import { DialogComponent } from 'src/app/components/room-list/dialog/dialog.component';
 import { Channel } from 'src/app/models/channel.interface';
 import { Message } from 'src/app/models/message.interface';
-import { ChannelService } from 'src/app/services/channel.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 export interface DialogData {
   name: string;
@@ -18,7 +18,7 @@ export interface DialogData {
   styleUrls: ['./room-list.component.css'],
 })
 export class RoomListComponent implements OnInit {
-  channels: Channel[] = [];
+  channels$: Observable<Channel[]>;
   userId: string | null = '';
   pass: string = '';
   name: string = '';
@@ -31,10 +31,9 @@ export class RoomListComponent implements OnInit {
   };
   @Output() channelChoosen = new EventEmitter<Channel>();
 
-  constructor(
-    private channelService: ChannelService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private chatService: ChatService, public dialog: MatDialog) {
+    this.channels$ = this.chatService.getAllChannels();
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -43,8 +42,6 @@ export class RoomListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // this.pass = result.pass;
-      // this.name = result.name;
       const channel: Channel = {
         name: result.name,
         users: [],
@@ -57,34 +54,13 @@ export class RoomListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getAllChannels();
-  }
+  ngOnInit(): void {}
 
   choosenChannel(channel: Channel) {
     this.channelChoosen.emit(channel);
   }
 
   addChannel(channel: Channel) {
-    // console.log('Add room called');
-    this.channelService.addChannel(channel).subscribe(() => {});
-  }
-
-  private getAllChannels(): void {
-    this.channelService
-      .getAllChannels()
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({
-            id: c.payload.doc.id,
-            ...c.payload.doc.data(),
-          }))
-        )
-      )
-      .subscribe((data) => {
-        this.channels = data;
-        console.log(`channels found: ${data.length}`);
-      });
+    this.chatService.addChannel(channel).subscribe(() => {});
   }
 }

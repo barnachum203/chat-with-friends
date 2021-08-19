@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Message } from '../models/message.interface';
+// import { Observable } from 'rxjs';
+// import { Message } from '../models/message.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AngularFirestore } from '@angular/fire/firestore';
+// import { AngularFirestore } from '@angular/fire/firestore';
 
 const httpOptionsWithAuthToken = (token: string) => ({
   headers: new HttpHeaders({
@@ -15,21 +15,21 @@ const httpOptionsWithAuthToken = (token: string) => ({
   providedIn: 'root',
 })
 export class MessagingService {
-  messageURL = 'http://localhost:8000/api/message';
-  channelURL = 'http://localhost:8000/api/channel';
+  // messageURL = 'http://localhost:8000/api/message';
+  // channelURL = 'http://localhost:8000/api/channel';
 
-  constructor(private http: HttpClient, private store: AngularFirestore) {}
+  constructor() {}
 
-  sendMessage(message: Message, id: string): Observable<Message> {
-    return this.http.post<Message>(this.messageURL + '/' + id, message);
-  }
+  // sendMessage(message: Message, id: string): Observable<Message> {
+  //   return this.http.post<Message>(this.messageURL + '/' + id, message);
+  // }
 
-  getMessages(channelId: string): Observable<string[]> {
-    return this.http.get<string[]>(this.channelURL + '/' + channelId);
-  }
+  // getMessages(channelId: string): Observable<string[]> {
+  //   return this.http.get<string[]>(this.channelURL + '/' + channelId);
+  // }
 
-  //Get realtime data from firebase (throghu AngularFirestore)
-  getAllMessages(id: string) {
-    return this.store.collection('channels').doc(id).snapshotChanges();
-  }
+  // //Get realtime data from firebase (throghu AngularFirestore)
+  // getAllMessages(id: string) {
+  //   return this.store.collection('channels').doc(id).snapshotChanges();
+  // }
 }

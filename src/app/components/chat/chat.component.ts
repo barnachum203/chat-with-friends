@@ -11,8 +11,7 @@ import { Channel } from 'src/app/models/channel.interface';
 import { Message } from 'src/app/models/message.interface';
 import { User } from 'src/app/models/user.inteface';
 import { AuthService } from 'src/app/services/auth.service';
-import { ChannelService } from 'src/app/services/channel.service';
-import { MessagingService } from 'src/app/services/messaging.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -44,9 +43,8 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
   };
 
   constructor(
-    private messagingService: MessagingService,
-    private authService: AuthService,
-    private channelService: ChannelService
+    private chatService: ChatService,
+    private authService: AuthService
   ) {
     if (localStorage.getItem('userId')) {
       this.currentUserId = localStorage.getItem('userId');
@@ -66,7 +64,7 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {}
 
   private getAllMessages(id: string) {
-    this.subscription = this.messagingService
+    this.subscription = this.chatService
       .getAllMessages(id)
       .subscribe((data) => {
         this.messages = data.payload.get('messages');
@@ -112,7 +110,7 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
     console.log(`Send message to ${id}`);
 
     if (id) {
-      this.messagingService.sendMessage(message, id).subscribe(() => {
+      this.chatService.sendMessage(message, id).subscribe(() => {
         this.text = '';
         this.sendingMessage = false;
       });
@@ -124,7 +122,7 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
       `Added user called uid: ${this.currentUserId}, cid: ${this.channelId}`
     );
     if (this.currentUserId)
-      this.channelService
+      this.chatService
         .addUserToChannel(this.channelId, this.currentUserId)
         .subscribe(() => {});
   }
@@ -134,7 +132,7 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
       `Remove user called uid: ${this.currentUserId}, cid: ${this.channelId}`
     );
     if (this.currentUserId)
-      this.channelService
+      this.chatService
         .removeUserFromChannel(this.channelId, this.currentUserId)
         .subscribe(() => {});
   }

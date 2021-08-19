@@ -51,12 +51,12 @@ export class ChatService {
     return this.http.get<Channel>(this.channelURL + id);
   }
 
-  addUserToChannel(cid: string, uid: string): Observable<string> {
-    return this.http.post<string>(`${this.channelURL}/${cid}/${uid}`, uid);
+  addUserToChannel(cid: string, uid: string) {
+    return this.http.put(`${this.channelURL}/${cid}/${uid}`, uid);
   }
 
-  removeUserFromChannel(cid: string, uid: string): Observable<string> {
-    return this.http.delete<string>(`${this.channelURL}/${cid}/${uid}`);
+  removeUserFromChannel(cid: string, uid: string) {
+    return this.http.put(`${this.channelURL}/${cid}`, {uid});
   }
 
   //Get realtime data from firebase (throghu AngularFirestore)
@@ -81,5 +81,10 @@ export class ChatService {
   //Get realtime data from firebase (throghu AngularFirestore)
   getAllUsers(): AngularFirestoreCollection<Channel> {
     return this.store.collection('/channels');
+  }
+
+  removeChannel(cid: string, uid: string) {
+    return this.http.delete(`${this.channelURL}/${cid}/${uid}`);
+
   }
 }

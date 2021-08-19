@@ -1,9 +1,14 @@
-<button class="text-center" mat-raised-button color="primary" (click)="openDialog()">
+<button
+  class="text-center"
+  mat-raised-button
+  color="primary"
+  (click)="openDialog()"
+>
   Add Room
 </button>
 <mat-selection-list class="conversations" #rooms [multiple]="false">
   <mat-list-option
-    *ngFor="let channel of channels"
+    *ngFor="let channel of channels$ | async"
     [value]="channel"
     (click)="choosenChannel(channel)"
   >
@@ -12,4 +17,3 @@
   </mat-list-option>
 </mat-selection-list>
 <p></p>
-

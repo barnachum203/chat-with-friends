@@ -51,13 +51,20 @@ const getAllChannels = async (req, res) => {
 const removeChannel = async (req, res) => {
   try {
     const id = req.params.id;
-    const channel = await firestore.collection("channels").doc(id).delete();
+    const uid = req.body;
+    const channelRef = firestore.collection("channels").doc(id);
+    const channel = await channelRef.get();
+    const user = await firestore.collection("users").doc(uid).get()
+    if(channel.data().creatorId == user.data().uid){
+      channel.delete()
+    }
     res.send("Channel deleted successfully");
   } catch (err) {
     res.status(500).send("Something went wrong - " + err);
   }
 };
 
+//Unused
 const updateChannel = async (req, res) => {
   try {
     const id = req.params.id;
@@ -72,7 +79,7 @@ const updateChannel = async (req, res) => {
 const removeUserFromChannel = async (req, res) => {
   try {
     const cid = req.params.cid;
-    const uid = req.params.uid;
+    const uid = req.body.uid;
     const channelRef = firestore.collection("channels").doc(cid);
     const user = await firestore.collection("users").doc(uid).get();
     await channelRef.update({

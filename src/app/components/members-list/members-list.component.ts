@@ -6,8 +6,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Channel } from 'src/app/models/channel.interface';
-import { ChannelService } from 'src/app/services/channel.service';
 import { map } from 'rxjs/internal/operators/map';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-members-list',
@@ -19,14 +19,14 @@ export class MembersListComponent implements OnInit, OnChanges {
   users: string[] | undefined = [];
   @Input() channel: Channel | undefined;
 
-  constructor(private channelService: ChannelService) {}
+  constructor(private chatService: ChatService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.renderUsers();
   }
 
   private renderUsers() {
-    this.channelService
+    this.chatService
       .getAllUsers()
       .snapshotChanges()
       .pipe(
