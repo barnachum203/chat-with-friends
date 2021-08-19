@@ -22,7 +22,7 @@ save user locally
 export class AuthService {
   private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private userDetails$: Subject<User> = new Subject<User>(); //We will use subject because we dont want to initial the value
-  private usersURL = 'http://localhost:8000/api/user';
+  private usersURL = 'http://chat--with-friends.herokuapp.com/api/user';
 
   constructor(
     private afs: AngularFirestore,
