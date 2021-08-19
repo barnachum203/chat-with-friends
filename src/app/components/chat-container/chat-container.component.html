@@ -15,8 +15,8 @@
       </mat-tab-group>
     </mat-card>
   </mat-sidenav>
-  <mat-sidenav position="end" mode="side" opened *ngIf="selectedConversation">
-    <mat-card>
+  <mat-sidenav class="active-members" position="end" mode="side" opened >
+    <mat-card *ngIf="selectedConversation">
       <app-members-list [channel]="choosenChan">  </app-members-list>
     </mat-card>
   </mat-sidenav>
