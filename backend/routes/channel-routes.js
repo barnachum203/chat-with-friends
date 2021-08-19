@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/channel", addChannel);
 router.get("/channel/:id", getChannelById);
 router.get("/channel", getAllChannels);
-router.delete("/channel/:id", removeChannel);
+router.delete("/channel/:cid/:uid", removeChannel);
 // router.put("/channel/:id", updateChannel);
 router.put("/channel/:cid", removeUserFromChannel);
 router.put("/channel/:cid/:uid", addUserToChannel);
