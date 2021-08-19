@@ -69,43 +69,43 @@ const updateChannel = async (req, res) => {
   }
 };
 
-const removeUserFromChannel = async (req, res) =>{
+const removeUserFromChannel = async (req, res) => {
   try {
     const cid = req.params.cid;
     const uid = req.params.uid;
     const channelRef = firestore.collection("channels").doc(cid);
+    const user = await firestore.collection("users").doc(uid).get();
     await channelRef.update({
-      users: admin.firestore.FieldValue.arrayRemove(uid),
-    })
-    console.log(`removed user ${uid} to ${cid} successfully`);
-    res.send(`removed successfully`);
-  
+      users: admin.firestore.FieldValue.arrayRemove(user.data().displayName),
+    });
+    console.log(
+      `removed user: ${user.data().displayName} from: ${cid} successfully`
+    );
+    res.status(200).send(`removed successfully`);
   } catch (error) {
     console.log("Something went wrong - " + error);
     res.status(500).send("Something went wrong - " + error);
-
   }
+};
 
-}
-
-const addUserToChannel = async (req, res) =>{
+const addUserToChannel = async (req, res) => {
   try {
     const cid = req.params.cid;
     const uid = req.params.uid;
     const channelRef = firestore.collection("channels").doc(cid);
+    const user = await firestore.collection("users").doc(uid).get();
     await channelRef.update({
-      users: admin.firestore.FieldValue.arrayUnion(uid),
-    })
-    console.log(`added user ${uid} to ${cid} successfully`);
-    res.send(`removed successfully`);
-  
+      users: admin.firestore.FieldValue.arrayUnion(user.data().displayName),
+    });
+    console.log(
+      `added user: ${user.data().displayName} to: ${cid} successfully`
+    );
+    res.status(200).send(`removed successfully`);
   } catch (error) {
     console.log("Something went wrong - " + error);
     res.status(500).send("Something went wrong - " + error);
-
   }
-
-}
+};
 
 module.exports = {
   addChannel,
@@ -114,5 +114,5 @@ module.exports = {
   removeChannel,
   updateChannel,
   removeUserFromChannel,
-  addUserToChannel
+  addUserToChannel,
 };
