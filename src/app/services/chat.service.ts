@@ -5,6 +5,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Channel } from '../models/channel.interface';
 import { Message } from '../models/message.interface';
 
@@ -32,6 +33,7 @@ export class ChatService {
   //Get realtime data from firebase (throghu AngularFirestore)
   getAllMessages(id: string) {
     return this.store.collection('channels').doc(id).snapshotChanges();
+    
   }
 
   /**************************
@@ -58,8 +60,22 @@ export class ChatService {
   }
 
   //Get realtime data from firebase (throghu AngularFirestore)
-  getAllChannels(): AngularFirestoreCollection<Channel> {
-    return this.store.collection('/channels');
+  getAllChannels(): Observable<Channel[]> {
+    return this.store
+      .collection('/channels')
+      .snapshotChanges()
+      .pipe(
+        map((snaps) => {
+          return snaps.map((snap) => {
+            const id = snap.payload.doc.id;
+            const data: Channel = <Channel>snap.payload.doc.data();
+            return <Channel>{
+              ...data,
+              id,
+            };
+          });
+        })
+      );
   }
 
   //Get realtime data from firebase (throghu AngularFirestore)
