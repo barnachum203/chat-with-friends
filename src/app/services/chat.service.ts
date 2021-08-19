@@ -13,8 +13,8 @@ import { Message } from '../models/message.interface';
   providedIn: 'root',
 })
 export class ChatService {
-  messageURL = 'http://localhost:8000/api/message';
-  channelURL = 'http://localhost:8000/api/channel';
+  messageURL = 'https://chat--with-friends.herokuapp.com/api/message';
+  channelURL = 'https://chat--with-friends.herokuapp.com/api/channel';
 
   constructor(private http: HttpClient, private store: AngularFirestore) {}
 

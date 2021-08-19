@@ -9,13 +9,17 @@
   "author": "Bar Nachum",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.15.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "firebase": "^8.8.1",
     "firebase-admin": "^9.11.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
