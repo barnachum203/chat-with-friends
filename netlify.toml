@@ -1,0 +1,9 @@
+[build]
+  publish = "/dist/chat-with-friends"
+  command = "ng build"
+  base="/"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

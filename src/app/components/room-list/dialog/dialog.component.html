@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Open chat</h1>
+<div mat-dialog-content>
+  <h2>What's your channel name?</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Channel Name</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.name"
+      type="text"
+      id="name"
+      name="name"
+      required
+    />
+    <div
+      *ngIf="
+        channelForm.get('name')?.invalid &&
+        (channelForm.get('name')?.dirty || channelForm.get('name')?.touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="channelForm.get('name')?.errors?.required">
+        Name is required.
+      </div>
+    </div>
+  </mat-form-field>
+  <p>What's your channel pass? (Not required)</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite Pass</mat-label>
+    <input matInput [(ngModel)]="data.pass" type="text" id="pass" name="pass" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    Add Channel
+  </button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

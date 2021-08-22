@@ -1,0 +1,40 @@
+<mat-divider></mat-divider>
+<mat-list dense class="conversation-history mat-typography">
+  <ul>
+    <li class="message-line" *ngFor="let message of messages">
+      <div class="user">
+        <img src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_960_720.png" />
+        <b> -> {{ message.from }}</b>
+
+        <br />
+        {{ message.timeStamp | date: "medium" }}
+        נשלח ב
+        <p></p>
+      </div>
+      <div
+        class="myMessage right"
+        *ngIf="message.userId == user.uid; else anotherUser"
+      >
+        <p>{{ message.message }}</p>
+      </div>
+      <ng-template #anotherUser>
+        <div class="notMyMessage left">
+          <p>{{ message.message }}</p>
+        </div>
+      </ng-template>
+      <p></p>
+    </li>
+  </ul>
+</mat-list>
+<div class="conversation-input">
+  <mat-divider></mat-divider>
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      placeholder="Start chatting..."
+      name="text"
+      [(ngModel)]="text"
+    />
+    <mat-icon matSuffix (click)="sendMessage()">send</mat-icon>
+  </mat-form-field>
+</div>
