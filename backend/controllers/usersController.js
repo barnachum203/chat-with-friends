@@ -7,7 +7,7 @@ const addUser = async (req, res) => {
   try {
     const data = req.body;
     const user = await firestore.collection("users").doc(data.uid).set(data);
-    res.send(`Record saved sucessfully: ${data.displayName}`);
+    res.status(200).send(`Record saved sucessfully: ${data.displayName}`);
   } catch (err) {
     res.send(500, "Something went wrong...");
   }
@@ -62,9 +62,9 @@ const updateUser = async (req, res) => {
     //Update user only if the user id === to collection id.
     if (id === data.uid) {
       const userRef = await firestore.collection("users").doc(id).update(data);
-      res.send(`updated user: ${data}`);
+      res.status(200).send(`updated user: ${data}`);
     } else {
-      res.send(`Cannot update user id: ${id}`);
+      res.status(500).send(`Cannot update user id: ${id}`);
     }
   } catch (err) {
     res.status(500).send("Somethig went wrong - " + err);
@@ -75,7 +75,7 @@ const deleteUser = async (req, res) => {
   try {
     const id = req.params.id;
     const userRef = await firestore.collection("users").doc(id).delete();
-    res.send(`User deleted Successfully.`);
+    res.status(200).send(`User deleted Successfully.`);
   } catch (err) {
     res.status(500).send("Somethig went wrong - " + err);
   }

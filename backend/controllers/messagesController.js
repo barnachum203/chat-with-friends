@@ -39,11 +39,11 @@ const getMessages = async (req, res) => {
   const observer = await channelRef.onSnapshot(
     (snapshot) => {
       console.log(`changes: ${snapshot}`);
-      res.send(snapshot);
+      res.status(200).send(snapshot);
     },
     (err) => {
       console.log(`Error: ${err}`);
-      res.send(err);
+      res.status(500).send(err);
     }
   );
 };

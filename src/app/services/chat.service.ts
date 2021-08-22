@@ -39,7 +39,7 @@ export class ChatService {
   /**************************
    ********* CHANNEL ********
    **************************/
-  getChannels(): Observable<any[]> {
+  getChannels(): Observable<any[]> {  
     return this.http.get<any[]>(this.channelURL);
   }
 
@@ -52,11 +52,24 @@ export class ChatService {
   }
 
   addUserToChannel(cid: string, uid: string) {
-    return this.http.put(`${this.channelURL}/${cid}/${uid}`, uid);
+    this.http.put(`${this.channelURL}/${cid}/${uid}`, {uid}).subscribe((result) =>{
+      console.log(result);
+      
+    },(error) =>{
+      console.log(error);
+      
+    });
   }
 
   removeUserFromChannel(cid: string, uid: string) {
-    return this.http.put(`${this.channelURL}/${cid}`, {uid});
+    this.http.put(`${this.channelURL}/${cid}`, {uid}).subscribe((result) =>{
+      console.log(result);
+      
+    }
+    ,(error) =>{
+      console.log(error);
+      
+    });
   }
 
   //Get realtime data from firebase (throghu AngularFirestore)
@@ -79,8 +92,23 @@ export class ChatService {
   }
 
   //Get realtime data from firebase (throghu AngularFirestore)
-  getAllUsers(): AngularFirestoreCollection<Channel> {
-    return this.store.collection('/channels');
+  getAllUsers(): Observable<Channel[]> {
+    // return this.store.collection('/channels');
+    return this.store
+    .collection('/channels')
+    .snapshotChanges()
+    .pipe(
+      map((snaps) => {
+        return snaps.map((snap) => {
+          const id = snap.payload.doc.id;
+          const data: Channel = <Channel>snap.payload.doc.data();
+          return <Channel>{
+            ...data,
+            id,
+          };
+        });
+      })
+    );
   }
 
   removeChannel(cid: string, uid: string) {

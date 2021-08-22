@@ -124,7 +124,6 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
     if (this.currentUserId)
       this.chatService
         .addUserToChannel(this.channelId, this.currentUserId)
-        .subscribe(() => {});
   }
 
   removeUserFromChannel() {
@@ -134,6 +133,5 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
     if (this.currentUserId)
       this.chatService
         .removeUserFromChannel(this.channelId, this.currentUserId)
-        .subscribe(() => {});
   }
 }

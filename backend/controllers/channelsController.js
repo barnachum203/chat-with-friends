@@ -8,7 +8,7 @@ const addChannel = async (req, res) => {
   try {
     const data = req.body;
     const channel = await firestore.collection("channels").add(data);
-    res.send(`Channel record saved sucessfully: ${data.name}`);
+    res.status(200).send(`Channel record saved sucessfully: ${data.name}`);
   } catch (err) {
     res.status(500).send("Something went wrong...");
   }
@@ -18,7 +18,7 @@ const getChannelById = async (req, res) => {
   try {
     const id = req.params.id;
     const channel = await firestore.collection("channels").doc(id).get();
-    res.send(channel.data());
+    res.status(200).send(channel.data());
   } catch (err) {
     res.status(500).send("Something went wrong - " + err);
   }
@@ -41,7 +41,7 @@ const getAllChannels = async (req, res) => {
         );
         channels.push(channel);
       });
-      res.send(channels);
+      res.status(200).send(channels);
     }
   } catch (err) {
     res.status(500).send("Something went wrong - " + err);
@@ -58,7 +58,7 @@ const removeChannel = async (req, res) => {
     if(channel.data().creatorId == user.data().uid){
       channelRef.delete()
     }
-    res.send("Channel deleted successfully");
+    res.status(200).send("Channel deleted successfully");
   } catch (err) {
     res.status(500).send("Something went wrong - " + err);
   }
@@ -70,7 +70,7 @@ const updateChannel = async (req, res) => {
     const id = req.params.id;
     const data = req.body;
     const channel = await firestore.collection("channels").doc(id).update(data);
-    res.send(`updated successfully`);
+    res.status(200).send(`updated successfully`);
   } catch (err) {
     res.status(500).send("Something went wrong - " + err);
   }

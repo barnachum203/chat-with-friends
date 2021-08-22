@@ -28,15 +28,6 @@ export class MembersListComponent implements OnInit, OnChanges {
   private renderUsers() {
     this.chatService
       .getAllUsers()
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({
-            id: c.payload.doc.id,
-            ...c.payload.doc.data(),
-          }))
-        )
-      )
       .subscribe((data) => {
         this.channels = data;
         data.forEach((element) => {
