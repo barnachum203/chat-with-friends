@@ -52,22 +52,22 @@ export class ChatService {
   }
 
   addUserToChannel(cid: string, uid: string) {
-    this.http.put(`${this.channelURL}/${cid}/${uid}`, {uid}).subscribe((result) =>{
-      console.log(result);
+    this.http.put(`${this.channelURL}/${cid}/${uid}`, uid).subscribe((result) =>{
+      // console.log(result);
       
     },(error) =>{
-      console.log(error);
+      // console.log(error);
       
     });
   }
 
   removeUserFromChannel(cid: string, uid: string) {
     this.http.put(`${this.channelURL}/${cid}`, {uid}).subscribe((result) =>{
-      console.log(result);
+      // console.log(result);
       
     }
     ,(error) =>{
-      console.log(error);
+      // console.log(error);
       
     });
   }

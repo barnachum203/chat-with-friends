@@ -68,18 +68,18 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
       .getAllMessages(id)
       .subscribe((data) => {
         this.messages = data.payload.get('messages');
-        console.log(`messages: ${this.messages.length} From API`);
+        // console.log(`messages: ${this.messages.length} From API`);
       });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.channel?.messages) {
       this.subscription.unsubscribe();
-      console.log(
-        `${this.channel.messages.length} messages found From channel`
-      );
+      // console.log(
+      //   `${this.channel.messages.length} messages found From channel`
+      // );
 
-      console.log(`channel id: ${this.channelId}`);
+      // console.log(`channel id: ${this.channelId}`);
 
       //Subsucribe to new channel when choosed another room
       if (this.channel.id != this.channelId) {
@@ -91,7 +91,7 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
         this.addUserToChannel();
         this.getAllMessages(this.channelId);
       } else {
-        console.log(`Channel id wasn't changed.`);
+        console.error(`Channel id wasn't changed.`);
       }
     } else {
       console.log('No messages');
@@ -107,7 +107,7 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
       timeStamp: Date.now(),
     };
     const id = this.channel?.id;
-    console.log(`Send message to ${id}`);
+    // console.log(`Send message to ${id}`);
 
     if (id) {
       this.chatService.sendMessage(message, id).subscribe(() => {
@@ -118,18 +118,18 @@ export class ChatComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   addUserToChannel() {
-    console.log(
-      `Added user called uid: ${this.currentUserId}, cid: ${this.channelId}`
-    );
+    // console.log(
+    //   `Added user called uid: ${this.currentUserId}, cid: ${this.channelId}`
+    // );
     if (this.currentUserId)
       this.chatService
         .addUserToChannel(this.channelId, this.currentUserId)
   }
 
   removeUserFromChannel() {
-    console.log(
-      `Remove user called uid: ${this.currentUserId}, cid: ${this.channelId}`
-    );
+    // console.log(
+    //   `Remove user called uid: ${this.currentUserId}, cid: ${this.channelId}`
+    // );
     if (this.currentUserId)
       this.chatService
         .removeUserFromChannel(this.channelId, this.currentUserId)
