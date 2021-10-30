@@ -10,7 +10,7 @@
 # dependencies
 /node_modules
 backend/node_modules
-backend/credentails.json
+backend/credentials.json
 
 # profiling files
 chrome-profiler-events*.json
